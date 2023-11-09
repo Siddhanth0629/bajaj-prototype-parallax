@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('/Gotham-Font/Gotham-Font/GothamLight.ttf');
+        }
+
+        @font-face {
+            font-family: 'highspeed';
+            src: url('/high_speed_3/High\ Speed.ttf');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "CustomFont";
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        nav {
+            width: 100%;
+            height: 5.8rem;
+            background: #000;
+            color: #f5f5f5;
+            position: relative;
+            z-index: 3;
+            position: fixed;
+        }
+
+        .nav_items {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 2.4rem;
+            padding: 0px 3rem;
+        }
+
+        .nav_items li {
+            list-style: none;
+            font-size: 1.4rem;
+        }
+
+        .nav_items li:nth-child(1) {
+            border: 1px solid white;
+            padding: 0.6rem 1.6rem 0.6rem 1.6rem;
+            border-radius: 5.6rem;
+        }
+
+        .canvas-container {
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+            /* background-image: url("images/bg.png"); */
+        }
+
+        /* .canvas-container h1 {
+            position: relative;
+            z-index: -0.5;
+            top: 30%;
+            left: 50%;
+            font-family: "highspeed";
+            font-size: 5.8rem;
+        } */
+
+        .page {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section {
+            width: 100%;
+            height: 100vh;
+            color: white;
+        }
+
+        .section-one {
+            position: relative;
+            width: 100%;
+        }
+
+        .section-three {
+            /* background-color: white; */
+        }
+
+        .section-one .tagline {
+            color: white !important;
+            font-weight: 400;
+            font-size: 64px;
+            text-align: center;
+            line-height: 96px;
+            font-family: "highspeed";
+            position: fixed;
+            z-index: -3;
+            bottom: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65%;
+            text-align: center;
+        }
+
+        .section-one .tagline span {
+            color: red;
+        }
+
+        .section-one .left-grass {
+            position: fixed;
+            width: 60%;
+            right: 40%;
+            bottom: -25%;
+            transform: translateX(20%);
+        }
+
+
+        .section-one .right-grass {
+            position: fixed;
+            width: 60%;
+            right: 0%;
+            bottom: -25%;
+            transform: translateX(-20%);
+        }
+
+        .page2 {
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100vh;
+            background-image: url("images/mountain-bg-ds.gif");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .page2 img {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul class="nav_items">
+            <li>Personality</li>
+            <li>Features 1</li>
+            <li>Enquire</li>
+            <li>Features 2</li>
+            <li>Key Specs</li>
+            <li>Pricing</li>
+            <li>Gallery</li>
+            <li>App Info</li>
+            <li>Expert Talks</li>
+            <li>FAQs</li>
+        </ul>
+    </nav>
+    <div class="canvas-container">
+        <h1 style="color: white;">Section</h1>
+    </div>
+    <div class="page">
+        <div class="section section-one">
+            <p class="tagline">Power Precision <span>Control</span></p>
+            <img src="/images/klipartz.com.png" alt="" class="left-grass">
+            <img src="/images/klipartz.com.png" alt="" class="right-grass">
+        </div>
+        <div class="section section-two">
+            <h1>Section two</h1>
+        </div>
+        <div class="section section-three">
+            <h1>Section three</h1>
+        </div>
+        <div class="section section-four">
+            <h1>Section four</h1>
+        </div>
+    </div>
+    <div class="page2">
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/three@0.157.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.146.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+        // Set up Three.js scene and camera
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+        );
+        camera.lookAt(0, 0, 0);
+        camera.position.set(0, 0.5, 3.4);
+        camera.rotation.set(0, 0, 0)
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        const container = document.querySelector(".canvas-container");
+        container.appendChild(renderer.domElement);
+
+        // Add lighting (optional)
+        const light = new THREE.PointLight(0xffffff);
+        light.position.set(5, 5, 5);
+        scene.add(light);
+
+        //Ambient Light
+        const ambientLight = new THREE.AmbientLight(0xffffff, 2); // Color can be adjusted (hex format)
+        scene.add(ambientLight);
+
+        //Directional Light
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 3); // Color and intensity
+        directionalLight.position.set(1, 1, 1); // Set the light's direction
+        scene.add(directionalLight);
+
+
+        let model;
+        let frontwheel;
+        let backwheel;
+
+
+        // GLTF Loader
+        const gltfLoader = new THREE.GLTFLoader();
+        gltfLoader.load("/assets/bajajAnimation.glb", (gltf) => {
+            model = gltf.scene;
+            frontwheel = model.children[20];
+            backwheel = model.children[21];
+            engine = model.children[17];
+            backwheel.scale.set(1, 1, 1)
+            model.position.y = -3;
+            model.rotation.y = 0;
+            model.scale.set(4, 4, 4);
+            scene.add(model);
+
+            // const t3 = gsap.timeline({
+            //     scrollTrigger: {
+            //         trigger: ".section-three",
+            //         start: "top 50%",
+            //         end: "bottom 50%",
+            //         markers: true,
+            //         scrub: 0.5,
+            //         duration: 10,
+            //     },
+            // });
+
+
+
+            const t3 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".section-three",
+                    start: "top 50%",
+                    end: "bottom 50%",
+                    markers: true,
+                    scrub: 0.5,
+                    duration: 10,
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        const canvasContainer = document.querySelector(".canvas-container");
+
+                        if (progress >= 0 && progress <= 1) {
+                            renderer.setClearAlpha(-progress); // Set alpha value based on the progress
+                            canvasContainer.style.zIndex = 6; // Adjust zIndex accordingly
+                        } else {
+                            renderer.setClearAlpha(progress); // Set alpha value based on the progress
+                            canvasContainer.style.zIndex = 5;
+                        }
+                    },
+                },
+            });
+
+
+
+
+            t3.to(model.rotation, { y: Math.PI * 2.5, x: -0.25, scrub: true, duration: 5 }, "t3");
+            t3.to(camera.position, { y: 0, z: 5 }, "t3")
+            t3.to(".section-one", { opacity: 0, scrub: 0.4, duration: 5 }, "t3")
+            t3.to(".canvas-container", { zIndex: 6 })
+            t3.to(model.position, { y: -7 });
+            t3.to(model.scale, { x: 5.5, y: 5.5, z: 5.5 });
+
+        });
+
+        function onWindowResize() {
+            const newWidth = window.innerWidth;
+            const newHeight = window.innerHeight;
+            camera.aspect = newWidth / newHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(newWidth, newHeight);
+        }
+
+
+        // Render the scene
+        function animate() {
+            requestAnimationFrame(animate);
+            // frontwheel.rotation.x += 0.09;
+            // backwheel.rotation.x += 0.09;
+            renderer.render(scene, camera);
+
+        }
+
+        animate();
+
+        //GSAP
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".page",
+                start: "top top",
+                end: "bottom bottom",
+                duration: 3,
+                scrub: true,
+                // markers: true,
+            },
+        });
+
+        tl.to(".left-grass", { left: -600, opacity: 0, duration: 1, scrub: true }, "grass")
+        tl.to(".right-grass", { right: -400, opacity: 0, duration: 1, scrub: true }, "grass")
+        tl.from(".tagline", { opacity: 0, duration: 3, scrub: true, zIndex: -1 }, "grass")
+
+
+        const t2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".section-one",
+                start: "50% 50%",
+                end: "bottom 50%",
+                // markers: true,
+                scrub: 0.5,
+                duration: 3,
+            },
+        });
+
+        t2.to(camera.position, {
+            z: 2.8,
+            y: 0.5,
+            x: 0,
+            duration: 2,
+            scrub: 0.5,
+        }).to(camera.rotation, { x: -0.4 });
+
+
+        // const t3 = gsap.timeline({
+        //     scrollTrigger: {
+        //         trigger: ".section-three",
+        //         start: "top top",
+        //         end: "bottom bottom",
+        //         markers: true,
+        //         scrub: 0.5,
+        //         duration: 10,
+        //     },
+        // });
+
+        // t3.to(model.rotation, { y: Math.PI * 2, scrub: true });  // Rotate around y-axis
+
+    </script>
+</body>
+
+</html>

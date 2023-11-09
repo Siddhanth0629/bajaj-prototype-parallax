@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('/Gotham-Font/Gotham-Font/GothamLight.ttf');
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "CustomFont";
+}
+
+html {
+    font-size: 62.5%;
+}
+
+nav {
+    width: 100%;
+    height: 5.8rem;
+    background: #000;
+    color: #f5f5f5;
+    position: relative;
+    z-index: 3;
+    position: fixed;
+}
+
+.nav_items {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 2.4rem;
+    padding: 0px 3rem;
+}
+
+.nav_items li {
+    list-style: none;
+    font-size: 1.4rem;
+}
+
+.nav_items li:nth-child(1) {
+    border: 1px solid white;
+    padding: 0.6rem 1.6rem 0.6rem 1.6rem;
+    border-radius: 5.6rem;
+}
+
+.canvas-container {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+}
+
+.page {
+    position: relative;
+    z-index: 2;
+}
+
+.section {
+    width: 100%;
+    height: 100vh;
+    color: white;
+}
+
+.section-one {
+    position: relative;
+}
+
+.section-one .left-grass {
+    position: absolute;
+    right: 50%;
+    bottom: -22%;
+    transform: translateX(20%);
+}
+
+
+.section-one .right-grass {
+    position: absolute;
+    left: 50%;
+    bottom: -22%;
+    transform: translateX(-20%);
+}
